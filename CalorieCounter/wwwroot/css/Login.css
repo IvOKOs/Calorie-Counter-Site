@@ -1,0 +1,90 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;600&display=swap');
+
+body {
+    height: 100vh;
+    position: relative;
+    background: linear-gradient(to top left, #28b487, #7dd56f);
+    color: #285430;
+    margin: 0;
+    padding: 0;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 600;
+}
+
+
+.container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    text-align: center;
+    max-width: 550px;
+    padding: 0 2% 1% 2%;
+    border: 1px solid white;
+    border-radius: .5rem;
+}
+
+.header-container {
+    display: flex;
+    justify-content: center;
+    font-size: 1.35rem;
+    gap: .5rem;
+}
+
+.header-container img {
+    height: 3rem;
+    margin-top: 6%;
+}
+
+.container p {
+    color: red;
+    margin: 0;
+} 
+
+hr {
+    color: #285430;
+}
+
+.login-container {
+    display: flex;
+    font-size: 1.25rem;
+}
+
+.login-info {
+    display: flex;
+    gap: 1rem;
+}
+
+.labels,
+.inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+    justify-content: center;
+    color: black;
+}
+
+.inputs input {
+    height: 1.25rem;
+    width: 12rem;
+}
+
+.container button {
+    border-radius: 10px 0px;
+    cursor: pointer;
+    border: 1px solid #28b487;
+    padding: .5rem;
+    width: 25%;
+    height: 20%;
+    background: white;
+    color: #28b487;
+    transition: all 300ms;
+}
+
+.container button:hover {
+    transform: scale(1.3);
+    color: white;
+    background: linear-gradient(to top left, #28b487, #7dd56f);
+} 

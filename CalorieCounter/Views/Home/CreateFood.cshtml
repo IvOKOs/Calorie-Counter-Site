@@ -1,0 +1,52 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Food</title>
+    <link href="@Url.Content("~/css/CreateFood.css")" rel="stylesheet"/> 
+</head>
+<body>
+
+    <div class="container">
+        <form method="post" asp-controller="Home" asp-action="CreateFood" onsubmit="return validateForm()"> 
+            <h2>Create your own food!</h2>
+            <div class="main-food-content">
+                <div class="food-img-container">
+                    <img src="~/imgs/cookbook.png" alt="A cookbook"> 
+                </div>
+                <div class="food-details-container">
+                    <div class="food-labels">
+                        <label for="name" class="name-label">Name:</label>
+                        <label for="calories">Calories:</label>
+                        <label for="protein">Protein:</label>
+                        <label for="carbs">Carbs:</label>
+                        <label for="fat">Fat:</label>
+                    </div>
+                    <div class="food-inputs">
+                        
+                        <input type="text" name="name" id="nameInput"> 
+                        <p class="hidden">The name must be at least 2 characters long</p>
+                        <input type="text" name="calories">
+                        <input type="text" name="protein">
+                        <input type="text" name="carbs">
+                        <input type="text" name="fat"> 
+                    </div>
+                </div>
+            </div>
+            <div class="button-container">
+                <button type="submit">Create</button>
+                <button type="button" id="cancelBtn">Cancel</button> 
+            </div>
+        </form>
+    </div>
+
+    <script src="~/js/CreateFood.js"></script> 
+
+</body>
+</html>

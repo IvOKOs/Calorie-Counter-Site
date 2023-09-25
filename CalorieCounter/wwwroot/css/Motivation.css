@@ -1,0 +1,132 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;600&display=swap');
+
+
+
+body {
+    /* width: 100%; */
+    height: 100vh;
+    position: relative;
+    background: linear-gradient(to top left, #28b487, #7dd56f);
+    color: #285430;
+    margin: 0;
+    padding: 0;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 600;
+    overflow: hidden;
+}
+
+.nav-item {
+    margin-left: 5%;
+    font-size: 1.25rem;
+}
+
+.nav-link {
+    color: white;
+}
+
+.nav-link:hover {
+    color: white;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    display: none;
+}
+
+.dropdown-item {
+    cursor: pointer;
+}
+
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-40%, -50%);
+    display: flex;
+    gap: 3rem;
+}
+
+.wrapper {
+    max-width: 550px;
+    max-height: 300px;
+    padding: 2% 5%;
+    background-color: white;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.quote-container {
+    min-width: 400px;
+}
+
+.quote-container .content {
+    margin: 12% 0%;
+}
+
+.quote-container .quote-content {
+    display: flex;
+    justify-content: center;
+}
+
+.quote-container .quote {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.quote-content i:first-child {
+    margin: 0 2% 0 0;
+}
+
+.quote-content i:last-child {
+    margin: 0 0 0 2%;
+    display: flex;
+    align-items: flex-end;
+}
+
+.quote-container .quote-author {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 5%;
+    font-style: italic;
+    font-size: 1.1rem;
+}
+
+.quote-author span:first-child {
+    margin: -2% 2% 0 0;
+}
+
+.challenge-container {
+    min-width: 450px;
+}
+
+.wrapper header {
+    font-size: 2.5rem;
+    font-weight: 600;
+}
+
+.challenge-content {
+    margin: 12% 0%;
+    font-size: 1.35rem;
+}
+
+.challenge-content .challenge {
+    margin-bottom: 10%;
+}
+
+.challenge-content .difficulty {
+    font-size: 1.1rem;
+}
+
+.weightlifting-img {
+    position: relative;
+    left: 70%;
+    bottom: 30%;
+}
+
+.cool-img {
+    position: relative;
+    left: -25%;
+    top: 20%;
+    z-index: -1;
+}

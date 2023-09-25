@@ -1,0 +1,23 @@
+﻿@model string
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Exists</title>
+    <link href="@Url.Content("~/css/AccountExistsError.css")" rel="stylesheet"/> 
+</head>
+<body>
+    <div class="container"> 
+        <h1>Account already exists...</h1> 
+        <p>Sorry, it looks like there is already an existing account with this email: @Model</p>
+        <p>Are you trying to log in? 🤔</p>
+        <p>If you've already registered, go to: <a href="@Url.Action("Index", "Login")">LogIn</a></p> 
+    </div>
+</body>
+</html> 

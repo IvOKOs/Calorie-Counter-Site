@@ -1,0 +1,49 @@
+﻿@model bool 
+
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogIn</title>
+    <link href="@Url.Content("~/css/Login.css")" rel="stylesheet"/> 
+</head>
+<body>
+    <form method="post" asp-controller="Login" asp-action="Index"> 
+        <div class="container">
+            <div class="header-container"> 
+                <h1>Log In</h1>
+                <img src="~/imgs/checkmark.png" alt="A checkmark">
+            </div>
+            @if (Model)
+            {
+                <p>An error occured!😞</p> 
+                <p>Please check again your email and password</p> 
+            }
+            <hr>
+            <div class="login-container">
+                <div class="login-info">
+
+                    <div class="labels">
+                        <label for="email">Email:</label>
+                        <label for="password">Password:</label>
+                    </div>
+                    <div class="inputs">
+                        <input type="email" name="email" id="email"> 
+                        <input type="password" name="password" id="password"> 
+                    </div> 
+                </div>
+                <div class="apple-img-container"> 
+                    <img src="~/imgs/apple.png" alt="A waving apple"> 
+                </div>
+            </div>
+            <button type="submit">Log In</button> 
+        </div>
+    </form> 
+</body>
+</html> 

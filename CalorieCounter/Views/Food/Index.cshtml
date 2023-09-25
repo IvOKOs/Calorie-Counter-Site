@@ -1,0 +1,252 @@
+﻿@model FoodDailyMealsViewModel 
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@{
+    Layout = null;
+} 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"/> 
+    <title>Food</title>
+    <link href="@Url.Content("~/css/Food.css")" rel="stylesheet"/> 
+    
+</head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light box-shadow mb-3">
+        <div class="container-fluid">
+          <button 
+            class="navbar-toggler custom-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target=".navbar-collapse"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+            <ul class="navbar-nav flex-grow-1">
+              <li class="nav-item"><a
+                  class="nav-link"
+                  asp-area=""
+                  asp-controller="Home"
+                  asp-action="Index">Home</a>
+              </li>
+              <li class="nav-item dropdown" onmouseover="showDropdown()" onmouseout="hideDropdown()">
+                <a
+                  class="nav-link"
+                  asp-area=""
+                  asp-controller="Food"
+                  asp-action="Index"
+                  >Food
+               </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="dropdownMenu">
+                      <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="CreateFood">Create Food</a>
+                      <!-- Add more dropdown options here if needed -->
+                  </div>
+              </li>
+              <li class="nav-item" id="nav-it">
+                <a
+                  class="nav-link"
+                  asp-area=""
+                  asp-controller="Motivation"
+                  asp-action="Index"
+                  >Motivation</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <form method="post" asp-controller="Food" asp-action="PopulateFood"> 
+        <div class="searchbar">
+            <input type="text" id="searchInput" name="foodName" placeholder="Search food.." autocomplete="off"> 
+            <button type="submit"><img src="~/imgs/magnifying-glass.png" alt="A magnifying glass"></button> 
+        </div>
+    </form> 
+    <div id="autocompleteResults"></div> 
+    
+    
+    <div class="container"> 
+        <div class="meals-container form">
+            <h2>Daily Meals</h2> 
+            <hr>
+            <!-- c# iterating through lists --> 
+            <div>
+                <div class="meals-header">
+                    <span class="meals-heading-names">Name</span>
+                    <span class="meals-heading-names">Quantity</span>
+                    <span class="meals-heading-names">Calories</span>
+                    <span class="meals-heading-names">Protein</span>
+                    <span class="meals-heading-names">Carbs</span>
+                    <span class="meals-heading-names">Fat</span>
+                </div>
+                <h5>Breakfast</h5>
+                @if(Model.DailyMeals != null)
+                {
+                    <ol class="meal-items-list">
+                        @if(Model.DailyMeals.Breakfasts.Count > 0)
+                        {
+                            foreach(var item in Model.DailyMeals.Breakfasts)
+                            {
+                                <li class="meal-item">
+                                    <span class="meal-item-info">@item.Name</span> 
+                                    <span class="meal-item-info">@item.Quantity gr</span>
+                                    <span class="meal-item-info">@item.Calories kcal</span>
+                                    <span class="meal-item-info">@item.Protein gr</span>
+                                    <span class="meal-item-info">@item.Carbs gr</span>
+                                    <span class="meal-item-info">@item.Fat gr</span> 
+                                </li>
+                            }
+                        } 
+                    </ol>
+                }
+            </div>
+            <div>
+                <h5>Lunch</h5>
+                @if(Model.DailyMeals != null)
+                {
+                    <ol class="meal-items-list">
+                        @if(Model.DailyMeals.Lunches.Count > 0)
+                        {
+                            foreach(var item in Model.DailyMeals.Lunches)
+                            {
+                                <li class="meal-item">
+                                    <span class="meal-item-info">@item.Name</span> 
+                                    <span class="meal-item-info">@item.Quantity gr</span>
+                                    <span class="meal-item-info">@item.Calories kcal</span>
+                                    <span class="meal-item-info">@item.Protein gr</span>
+                                    <span class="meal-item-info">@item.Carbs gr</span>
+                                    <span class="meal-item-info">@item.Fat gr</span> 
+                                </li>
+                            }
+                        } 
+                    </ol>
+                }
+            </div>
+            <div>
+                <h5>Snack</h5>
+                @if(Model.DailyMeals != null)
+                {
+                    <ol class="meal-items-list">
+                        @if(Model.DailyMeals.Snacks.Count > 0)
+                        {
+                            foreach(var item in Model.DailyMeals.Snacks)
+                            {
+                                <li class="meal-item">
+                                    <span class="meal-item-info">@item.Name</span> 
+                                    <span class="meal-item-info">@item.Quantity gr</span>
+                                    <span class="meal-item-info">@item.Calories kcal</span>
+                                    <span class="meal-item-info">@item.Protein gr</span>
+                                    <span class="meal-item-info">@item.Carbs gr</span>
+                                    <span class="meal-item-info">@item.Fat gr</span> 
+                                </li>
+                            }
+                        } 
+                    </ol>
+                }
+            </div>
+            <div>
+                <h5>Dinner</h5> 
+                @if(Model.DailyMeals != null)
+                {
+                    <ol class="meal-items-list">
+                        @if(Model.DailyMeals.Dinners.Count > 0)
+                        {
+                            foreach(var item in Model.DailyMeals.Dinners)
+                            {
+                                <li class="meal-item">
+                                    <span class="meal-item-info">@item.Name</span> 
+                                    <span class="meal-item-info">@item.Quantity gr</span>
+                                    <span class="meal-item-info">@item.Calories kcal</span>
+                                    <span class="meal-item-info">@item.Protein gr</span>
+                                    <span class="meal-item-info">@item.Carbs gr</span>
+                                    <span class="meal-item-info">@item.Fat gr</span> 
+                                </li>
+                            }
+                        } 
+                    </ol>
+                }
+            </div>
+            <!-- one black line --> 
+            <hr class="total-line">
+            <div>
+                <p class="total-container">Total: 
+                    <span class="total-item">@string.Format("{0:0.0}", Model.Totals.TotalCalories) kcal</span> 
+                    <span class="total-item">@string.Format("{0:0.0}", Model.Totals.TotalProtein) gr</span>
+                    <span class="total-item">@string.Format("{0:0.0}", Model.Totals.TotalCarbs) gr</span>
+                    <span class="total-item">@string.Format("{0:0.0}", Model.Totals.TotalFat) gr</span> 
+                </p>
+            </div>
+        </div> 
+        
+        <div class="food-container form">
+            <form method="post" asp-controller="Food" asp-action="PopulateDailyMeals">
+                <h2>Food <img class="food-img" src="~/imgs/balanced-diet.png" alt="A balanced meal"></h2> 
+                <hr>
+                <div class="food-name-container"> 
+                    <div>
+                        <h5>Name: @Model.Food.Name </h5>  
+                    </div>
+                    <div class="food-quantity-container">
+                        <input class="food-quantity-input" name="quantity" type="text" value="@Model.Food.Quantity"> 
+                        <p>gr</p> 
+                    </div>
+                    <div class="dropdown-container"> 
+                        <label class="mealTime-label" for="meals">To: </label>
+                        <div class="dropdown" id="mealOptionsDropdown"> 
+                            <input type="text" class="textBox" name="meal" placeholder="Breakfast" value="Breakfast" readonly> 
+                            <div class="option">
+                                <div onclick="show('Breakfast')"><img src="~/imgs/breakfast.png" alt="A breakfast"> Breakfast</div>
+                                <div onclick="show('Lunch')"><img src="~/imgs/sandwich.png" alt="A sandwich"> Lunch</div>
+                                <div onclick="show('Snack')"><img src="~/imgs/snack.png" alt="A snack"> Snack</div>
+                                <div onclick="show('Dinner')"><img src="~/imgs/omelette.png" alt="An omelette"> Dinner</div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="nutrition-info">
+                    <h5>Calories: @string.Format("{0:0.0}", Model.Food.Calories) kcal</h5>
+                    <h5>Protein: @string.Format("{0:0.0}", Model.Food.Protein) gr</h5>
+                    <h5>Carbs: @string.Format("{0:0.0}", Model.Food.Carbs) gr</h5>
+                    <h5>Fat: @string.Format("{0:0.0}", Model.Food.Fat) gr</h5> 
+                </div>
+
+                <input type="hidden" name="foodName" value="@Model.Food.Name" />
+                <div id="nutrition-info-hidden">
+                    <input type="hidden" name="calories" value="@Model.Food.Calories" />
+                    <input type="hidden" name="protein" value="@Model.Food.Protein" />
+                    <input type="hidden" name="carbs" value="@Model.Food.Carbs" />
+                    <input type="hidden" name="fat" value="@Model.Food.Fat" /> 
+                </div>
+                
+
+                <div class="food-btn-container">
+                    <button type="submit">Add</button> 
+                </div>
+            </form>
+        </div>
+        
+        
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+    <script src="~/js/Food.js"></script> 
+  </body>
+</html>
+
+
+

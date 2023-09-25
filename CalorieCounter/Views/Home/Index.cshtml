@@ -1,0 +1,200 @@
+﻿@model CalorieCounter.Models.ViewModels.HomeViewModel 
+
+@{
+    ViewData["Title"] = "Home"; 
+}
+
+@{
+    Layout = null;
+} 
+
+@*@section Stylesheets {
+    <link rel="stylesheet" href="~/css/Home.css" /> 
+}*@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+      crossorigin="anonymous"/>
+      <link rel="icon" href=""> 
+      <link rel="stylesheet" href="/styles.css"> 
+    <title>Home</title>
+    <link href="@Url.Content("~/css/Home.css")" rel="stylesheet"/> 
+  </head>
+  <body>
+    <!-- the navbar --> 
+    <header>
+      <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light box-shadow mb-3">
+        <div class="container-fluid">
+          <button 
+            class="navbar-toggler custom-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target=".navbar-collapse"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+            <ul class="navbar-nav flex-grow-1">
+              <li class="nav-item"><a
+                  class="nav-link"
+                  asp-area=""
+                  asp-controller="Home"
+                  asp-action="Index">Home</a>
+              </li>
+              <li class="nav-item dropdown" onmouseover="showDropdown()" onmouseout="hideDropdown()">
+                <a
+                  class="nav-link"
+                  asp-area=""
+                  asp-controller="Food"
+                  asp-action="Index"
+                  >Food</a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="dropdownMenu">
+                      <a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="CreateFood">Create Food</a>
+                      <!-- Add more dropdown options here if needed -->
+                  </div>
+              </li>
+              <li class="nav-item" id="nav-it">
+                <a
+                  class="nav-link"
+                  asp-area=""
+                  asp-controller="Motivation"
+                  asp-action="Index"
+                  >Motivation</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <!-- end of the navbar -->
+
+    <div class="goal-container hidden">
+          <form method="post" asp-controller="Home" asp-action="Update">
+            <div>
+              <h5>Do you want to change your current goal?</h5> 
+            </div>
+            <div class="options-container">
+                @if(Model.UserGoals.Goal == "lose weight")
+                {
+                    <div class="goal-option goal-style">
+                        <input type="radio" id="runner" name="goal" value="1" hidden>
+                        <img src="~/imgs/runner.png" alt="A running man"> 
+                    </div>
+                }
+                else 
+                {
+                    <div class="goal-option">
+                        <input type="radio" id="runner" name="goal" value="" hidden>
+                        <img src="~/imgs/runner.png" alt="A running man"> 
+                    </div>
+                }
+          
+                @if(Model.UserGoals.Goal == "maintain weight")
+                {
+                    <div class="goal-option goal-style">
+                        <input type="radio" id="meditation" name="goal" value="2" hidden>
+                        <img src="~/imgs/meditation.png" alt="A meditating woman"> 
+                    </div>
+                }
+                else
+                {
+                    <div class="goal-option">
+                        <input type="radio" id="meditation" name="goal" value="" hidden>
+                        <img src="~/imgs/meditation.png" alt="A meditating woman"> 
+                    </div>
+                }
+
+                @if(Model.UserGoals.Goal == "gain weight")
+                {
+                    <div class="goal-option goal-style">
+                        <input type="radio" id="muscle" name="goal" value="3" hidden> 
+                        <img src="~/imgs/muscle.png" alt="A flexed biceps"> 
+                    </div>
+                }
+                else
+                {
+                    <div class="goal-option">
+                        <input type="radio" id="muscle" name="goal" value="" hidden> 
+                        <img src="~/imgs/muscle.png" alt="A flexed biceps"> 
+                    </div>
+                }
+            </div>
+            <div class="goal-name-container">
+              <div>
+                <p>Lose Weight</p>
+              </div>
+              <div>
+                <p>Maintain Weight</p> 
+              </div>
+              <div>
+                <p>Gain Weight</p>
+              </div>
+            </div>
+            <div class="btn-flex-container">
+              <button type="submit">Change</button>
+              <button type="button" class="cancel-btn">Cancel</button> 
+            </div>
+          </form> 
+    </div>
+
+    <div class="overlay hidden"></div> 
+
+    <div class="container">
+            <div class="form form-main-stats">
+              <div class="welcome-tag">
+                <h2>Welcome, @Model.UserGoals.FullName!</h2> 
+                <div class="curr-goal-container">
+                    <h5>Your current goal is - to @Model.UserGoals.Goal</h5> 
+                    <a class="change-link" href="">Change</a> 
+                </div> 
+              </div>
+                <hr> 
+                <p>Daily Calories Goal: @string.Format("{0:0.0}", Model.UserGoals.CaloriesGoal) kcal</p> 
+                <p>Total Calories: @string.Format("{0:0.0}", Model.Totals.TotalCalories) kcal</p>
+                <p>Total Protein: @string.Format("{0:0.0}", Model.Totals.TotalProtein) gr</p>
+                <p>Total Carbs: @string.Format("{0:0.0}", Model.Totals.TotalCarbs) gr</p>
+                <p>Total Fat: @string.Format("{0:0.0}", Model.Totals.TotalFat) gr</p> 
+            </div> 
+            <div class="form">
+              <h5>Macronutrients Daily Goal</h5> 
+              <hr> 
+                <div class="macro">
+                    <img 
+                        src="~/imgs/protein.png" 
+                        alt="fish, steak and an egg" 
+                        class="macro-img"> Protein: @string.Format("{0:0.0}", Model.UserGoals.ProteinGoal) gr
+                </div>
+                <div class="macro">
+                    <img 
+                        src="~/imgs/bread.png" 
+                        alt="bread and wheat" 
+                        class="macro-img"> Carbs: @string.Format("{0:0.0}", Model.UserGoals.CarbsGoal) gr
+                </div>
+                <div class="macro">
+                    <img 
+                        src="~/imgs/ketogenic-diet.png" 
+                        alt="an egg and an avocado" 
+                        class="macro-img"> Fat: @string.Format("{0:0.0}", Model.UserGoals.FatGoal) gr 
+                </div>
+            </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script> 
+    <script src="~/js/Home.js"></script> 
+  </body>
+</html>
+
+@*@section Scripts{
+    <script src="~/js/Home.js"></script> 
+}*@

@@ -1,0 +1,138 @@
+﻿@model CalorieCounter.Models.UserModel
+
+@{
+    ViewData["Title"] = "Create"; 
+    Layout = null; 
+}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <link href="@Url.Content("~/css/Register.css")" rel="stylesheet"/> 
+  </head>
+  <body> 
+    <form method="post" asp-controller="Register" asp-action="Create" data-multi-step class="multi-step-form">
+        @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)*@  
+          <div data-step class="card">
+            <h1 class="first-card-title">Hello. 😉</h1>
+            <p>To get started, please enter your credentials.</p>
+            <div class="group">
+              <label for="firstName">First Name:</label>
+              <input asp-for="FirstName" type="text" name="firstName" id="firstName" required min="2" max="14" /> 
+              <p class="error name-error"></p>  
+              <label for="lastName">Last Name:</label>
+              <input asp-for="LastName" type="text" name="lastName" id="lastName" required min="3" max="18" /> 
+              <p class="error name-error"></p>  
+              <label for="email">Email:</label>
+              <input asp-for="Email" type="email" name="email" id="email" />
+              <p class="error email-error"></p>
+              <label for="password">Password:</label>
+              <input asp-for="Password" type="password" name="password" id="password" /> 
+              <p class="error password-error"></p> 
+              <div class="login-link-container">
+                <p>Already have an account?</p>
+                <a href="@Url.Action("Index", "Login")">LogIn</a> 
+              </div> 
+            </div> 
+            <div class="single-button-group">
+               <button data-next type="button">Next</button> 
+            </div> 
+          </div>
+
+          <div data-step class="card">
+            <p>Tell us a little more about yourself</p>
+            <div class="group">
+              <label for="gender">Gender:</label>
+              <div class="genderContainer">
+            
+                <input asp-for="Gender" type="radio" name="gender" id="genderMale" value="male" />
+                <label for="genderMale">Male</label>
+                <input asp-for="Gender" type="radio" name="gender" id="genderFemale" value="female" />
+                <label for="genderFemale">Female</label>
+              </div>
+          
+              <label for="age">Age:</label>
+              <input asp-for="Age" type="number" name="age" id="age" />
+              <label for="height">Height (in cm):</label>
+              <input asp-for="Height" type="number" name="height" id="height" />
+              <label for="weight">Weight (in kg):</label>
+              <input asp-for="Weight" type="number" name="weight" id="weight" /> 
+            </div>
+            <div class="button-group">
+                <button data-previous type="button">Previous</button>
+               <button data-next type="button">Next</button>
+            </div>
+          </div>
+
+          <div data-step class="card">
+            <p>
+              For more precise evaluation, please select how active you are
+              throughout the day:
+            </p>
+            <div class="group">
+              <div class="radioContainer">
+            
+                <input asp-for="Activity" type="radio" id="sedentary" name="activity" value="1" />
+                <label for="sedentary">Sedentary - little to no exercise with a desk job</label> 
+
+                <input asp-for="Activity" type="radio" id="lightlyActive" name="activity" value="2" /> 
+                <label for="lightlyActive">Lightly active - light exercise 1 to 3 times/week</label>
+            
+                <input asp-for="Activity" type="radio" id="moderatelyActive" name="activity" value="3" /> 
+                <label for="moderatelyActive">Moderately active - exercise 3 to 5 times/week</label>
+            
+                <input asp-for="Activity" type="radio" id="veryActive" name="activity" value="4" /> 
+                <label for="veryActive">Very active - hard exercise 6 to 7 times/week</label>
+            
+                <input asp-for="Activity" type="radio" id="extremelyActive" name="activity" value="5" /> 
+                <label for="extremelyActive">Extremely active - daily exercise and a physical job</label>
+              </div>
+            </div>
+            <div class="button-group">
+              <button data-previous type="button">Previous</button>
+            <button data-next type="button">Next</button>  
+            </div>
+          </div>
+
+          <div data-step class="card">
+            <p>What is your goal?</p>
+            <div class="group">
+              <div class="goalContainer">
+                <input asp-for="Goal" type="radio" id="lose-weight" name="goal" value="1" /> 
+                <label for="lose-weight">Lose Weight 🏃‍♂️</label>
+
+                <input asp-for="Goal" type="radio" id="maintain-weight" name="goal" value="2" /> 
+                <label for="maintain-weight">Maintain Weight 🧘‍♀️</label>
+
+                <input asp-for="Goal" type="radio" id="gain-weight" name="goal" value="3" /> 
+                <label for="gain-weight">Gain Weight 💪</label>
+              </div>
+            </div>
+            <div class="button-group">
+              <button data-previous type="button">Previous</button>
+              <button type="submit">Submit</button> 
+            </div> 
+          </div>
+
+          <div data-step class="card">
+            <h1>Thank You!</h1>
+            <h4>We are calculating your daily calories.</h4>
+          </div>
+        </form>
+        @*<div>
+            <a asp-action="Index">Back to List</a>
+        </div>*@
+        <script src="~/js/Register.js"></script> 
+    </body>
+</html>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
