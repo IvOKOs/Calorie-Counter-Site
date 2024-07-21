@@ -81,118 +81,176 @@
     <div id="autocompleteResults"></div> 
     
     
-    <div class="container"> 
-        <div class="meals-container form">
-            <h2>Daily Meals</h2> 
-            <hr>
-            <!-- c# iterating through lists --> 
-            <div>
-                <div class="meals-header">
-                    <span class="meals-heading-names">Name</span>
-                    <span class="meals-heading-names">Quantity</span>
-                    <span class="meals-heading-names">Calories</span>
-                    <span class="meals-heading-names">Protein</span>
-                    <span class="meals-heading-names">Carbs</span>
-                    <span class="meals-heading-names">Fat</span>
-                </div>
-                <h5>Breakfast</h5>
-                @if(Model.DailyMeals != null)
+    
+    <div class="boxes-container">
+      <div class="meals-container form">
+        <h2>Daily Meals</h2> 
+        <hr>
+        <table>
+         <thead>
+          <tr>
+            <th></th>
+            <th class="align-col">Name</th>
+            <th class="align-col">Quantity</th>
+            <th class="align-col">Calories</th>
+            <th class="align-col">Protein</th>
+            <th class="align-col">Carbs</th>
+            <th class="align-col">Fat</th>
+          </tr>
+         </thead>
+        <tbody>
+            @if(Model.DailyMeals != null && Model.DailyMeals.Breakfasts.Count > 0)
+            {
+                int i = 1;
+                foreach(var item in Model.DailyMeals.Breakfasts)
                 {
-                    <ol class="meal-items-list">
-                        @if(Model.DailyMeals.Breakfasts.Count > 0)
+                    <tr>
+                        @if(i == 1)
                         {
-                            foreach(var item in Model.DailyMeals.Breakfasts)
-                            {
-                                <li class="meal-item">
-                                    <span class="meal-item-info">@item.Name</span> 
-                                    <span class="meal-item-info">@item.Quantity gr</span>
-                                    <span class="meal-item-info">@item.Calories kcal</span>
-                                    <span class="meal-item-info">@item.Protein gr</span>
-                                    <span class="meal-item-info">@item.Carbs gr</span>
-                                    <span class="meal-item-info">@item.Fat gr</span> 
-                                </li>
-                            }
-                        } 
-                    </ol>
-                }
-            </div>
-            <div>
-                <h5>Lunch</h5>
-                @if(Model.DailyMeals != null)
-                {
-                    <ol class="meal-items-list">
-                        @if(Model.DailyMeals.Lunches.Count > 0)
+                            <th>Breakfast</th>
+                        }
+                        else
                         {
-                            foreach(var item in Model.DailyMeals.Lunches)
-                            {
-                                <li class="meal-item">
-                                    <span class="meal-item-info">@item.Name</span> 
-                                    <span class="meal-item-info">@item.Quantity gr</span>
-                                    <span class="meal-item-info">@item.Calories kcal</span>
-                                    <span class="meal-item-info">@item.Protein gr</span>
-                                    <span class="meal-item-info">@item.Carbs gr</span>
-                                    <span class="meal-item-info">@item.Fat gr</span> 
-                                </li>
-                            }
-                        } 
-                    </ol>
+                            <th></th>        
+                        }
+                        <td class="align-col">@i. @item.Name</td>
+                        <td>@item.Quantity gr</td>
+                        <td>@item.Calories kcal</td>
+                        <td>@item.Protein gr</td>
+                        <td>@item.Carbs gr</td>
+                        <td>@item.Fat gr</td>
+                    </tr>
+                    i++;
                 }
-            </div>
-            <div>
-                <h5>Snack</h5>
-                @if(Model.DailyMeals != null)
-                {
-                    <ol class="meal-items-list">
-                        @if(Model.DailyMeals.Snacks.Count > 0)
-                        {
-                            foreach(var item in Model.DailyMeals.Snacks)
-                            {
-                                <li class="meal-item">
-                                    <span class="meal-item-info">@item.Name</span> 
-                                    <span class="meal-item-info">@item.Quantity gr</span>
-                                    <span class="meal-item-info">@item.Calories kcal</span>
-                                    <span class="meal-item-info">@item.Protein gr</span>
-                                    <span class="meal-item-info">@item.Carbs gr</span>
-                                    <span class="meal-item-info">@item.Fat gr</span> 
-                                </li>
-                            }
-                        } 
-                    </ol>
-                }
-            </div>
-            <div>
-                <h5>Dinner</h5> 
-                @if(Model.DailyMeals != null)
-                {
-                    <ol class="meal-items-list">
-                        @if(Model.DailyMeals.Dinners.Count > 0)
-                        {
-                            foreach(var item in Model.DailyMeals.Dinners)
-                            {
-                                <li class="meal-item">
-                                    <span class="meal-item-info">@item.Name</span> 
-                                    <span class="meal-item-info">@item.Quantity gr</span>
-                                    <span class="meal-item-info">@item.Calories kcal</span>
-                                    <span class="meal-item-info">@item.Protein gr</span>
-                                    <span class="meal-item-info">@item.Carbs gr</span>
-                                    <span class="meal-item-info">@item.Fat gr</span> 
-                                </li>
-                            }
-                        } 
-                    </ol>
-                }
-            </div>
-            <!-- one black line --> 
-            <hr class="total-line">
-            <div>
-                <p class="total-container">Total: 
-                    <span class="total-item">@string.Format("{0:0.0}", Model.Totals.TotalCalories) kcal</span> 
-                    <span class="total-item">@string.Format("{0:0.0}", Model.Totals.TotalProtein) gr</span>
-                    <span class="total-item">@string.Format("{0:0.0}", Model.Totals.TotalCarbs) gr</span>
-                    <span class="total-item">@string.Format("{0:0.0}", Model.Totals.TotalFat) gr</span> 
-                </p>
-            </div>
-        </div> 
+            }
+            else
+            {
+                <tr>
+                    <th>Breakfast</th>
+                    <td colspan="6"></td>
+                </tr>
+            }
+          <tr>
+            <td class="spacer-cell"></td>
+          </tr>
+          @if(Model.DailyMeals != null && Model.DailyMeals.Lunches.Count > 0)
+          {
+            int i = 1;
+            foreach(var item in Model.DailyMeals.Lunches)
+            {
+                <tr>
+                    @if(i == 1)
+                    {
+                        <th>Lunch</th>
+                    }
+                    else
+                    {
+                        <th></th>        
+                    }
+                    <td class="align-col">@i. @item.Name</td>
+                    <td>@item.Quantity gr</td>
+                    <td>@item.Calories kcal</td>
+                    <td>@item.Protein gr</td>
+                    <td>@item.Carbs gr</td>
+                    <td>@item.Fat gr</td>
+                </tr>
+                i++;
+            }
+          }
+          else
+          {
+              <tr>
+                  <th>Lunch</th>  
+                  <td colspan="6"></td>
+              </tr>
+          }
+          <tr>
+            <td class="spacer-cell"></td>
+          </tr>
+          @if(Model.DailyMeals != null && Model.DailyMeals.Snacks.Count > 0)
+          {
+            int i = 1;
+            foreach(var item in Model.DailyMeals.Snacks)
+            {
+                <tr>
+                    @if(i == 1)
+                    {
+                        <th>Snack</th>
+                    }
+                    else
+                    {
+                        <th></th>        
+                    }
+                    <td class="align-col">@i. @item.Name</td>
+                    <td>@item.Quantity gr</td>
+                    <td>@item.Calories kcal</td>
+                    <td>@item.Protein gr</td>
+                    <td>@item.Carbs gr</td>
+                    <td>@item.Fat gr</td>
+                </tr>
+                i++;
+            }
+          }
+          else
+          {
+              <tr>
+                  <th>Snack</th>  
+                  <td colspan="6"></td>
+              </tr>
+          }
+          <tr>
+            <td class="spacer-cell"></td>
+          </tr>
+          @if(Model.DailyMeals != null && Model.DailyMeals.Dinners.Count > 0)
+          {
+            int i = 1;
+            foreach(var item in Model.DailyMeals.Dinners)
+            {
+                <tr>
+                    @if(i == 1)
+                    {
+                        <th>Dinner</th>
+                    }
+                    else
+                    {
+                        <th></th>        
+                    }
+                    <td class="align-col">@i. @item.Name</td>
+                    <td>@item.Quantity gr</td>
+                    <td>@item.Calories kcal</td>
+                    <td>@item.Protein gr</td>
+                    <td>@item.Carbs gr</td>
+                    <td>@item.Fat gr</td>
+                </tr>
+                i++;
+            }
+          }
+          else
+          {
+              <tr>
+                  <th>Dinner</th>  
+                  <td colspan="6"></td>
+              </tr>
+          }
+          <tr>
+            <td></td>
+            <td colspan="6"><hr class="total-line" /></td>
+          </tr>
+            @if(Model.Totals != null && Model.Totals.TotalCalories > 0)
+            {
+              <tr>
+                <td>Total:</td>
+                <td></td>
+                <td></td>
+                <td>@string.Format("{0:0.0}", Model.Totals.TotalCalories) kcal</td>
+                <td>@string.Format("{0:0.0}", Model.Totals.TotalProtein) gr</td>
+                <td>@string.Format("{0:0.0}", Model.Totals.TotalCarbs) gr</td>
+                <td>@string.Format("{0:0.0}", Model.Totals.TotalFat) gr</td>
+              </tr>      
+            }
+        </tbody>
+      </table>
+      </div>
         
         <div class="food-container form">
             <form method="post" asp-controller="Food" asp-action="PopulateDailyMeals">
@@ -240,9 +298,8 @@
                 </div>
             </form>
         </div>
-        
-        
-    </div>
+      </div>
+    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
     <script src="~/js/Food.js"></script> 
   </body>

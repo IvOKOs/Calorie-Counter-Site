@@ -46,7 +46,8 @@ namespace CalorieCounter.Controllers
                     var principal = new ClaimsPrincipal(identity);
                     var authenticationProperties = new AuthenticationProperties
                     {
-                        ExpiresUtc = DateTime.UtcNow.AddHours(1) 
+                        ExpiresUtc = null,
+                        IsPersistent = false,
                     }; 
 
                     // Sign in the user by creating the authentication cookie
