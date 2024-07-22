@@ -71,6 +71,12 @@ namespace DataLibrary.BusinessLogic
 
         List<QuoteModel> GetAllQuotes();
 
-        List<ChallengeModel> GetAllChallenges(); 
+        List<ChallengeModel> GetAllChallenges();
+
+        void InsertWeightHistory(WeightHistoryModel weightHistory);
+
+        List<WeightHistoryModel> GetWeightHistoryByUserId(int userId);
+
+        void UpdateUser(UserModel user);
     }
 }

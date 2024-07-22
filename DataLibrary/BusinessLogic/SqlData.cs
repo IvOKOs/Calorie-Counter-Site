@@ -270,5 +270,48 @@ namespace DataLibrary.BusinessLogic
                                                             connectionStringName,
                                                             true); 
         }
+
+        public void InsertWeightHistory(WeightHistoryModel weightHistory)
+        {
+            _dataAccess.SaveData<dynamic>("dbo.spWeightHistory_InsertWeightHistory",
+                                            new 
+                                            { 
+                                                UserId = weightHistory.UserId,
+                                                Weight = weightHistory.Weight,
+                                                RecordedDate = weightHistory.RecordedDate,
+                                            },
+                                            connectionStringName,
+                                            true);
+        }
+
+        public List<WeightHistoryModel> GetWeightHistoryByUserId(int userId)
+        {
+            return _dataAccess.LoadData<WeightHistoryModel, dynamic>("dbo.spWeightHistory_GetWeightHistoryByUserId",
+                                                                new
+                                                                {
+                                                                    UserId = userId,
+                                                                },
+                                                                connectionStringName,
+                                                                true);
+        }
+
+        public void UpdateUser(UserModel user)
+        {
+            _dataAccess.SaveData<dynamic>("dbo.spUsers_UpdateUser",
+                                            new
+                                            {
+                                                FirstName = user.FirstName,
+                                                LastName = user.LastName,
+                                                Email = user.Email,
+                                                Gender = user.Gender,
+                                                Age = user.Age,
+                                                Height = user.Height,
+                                                Weight = user.Weight,
+                                                Activity = user.Activity,
+                                                Goal = user.Goal,
+                                            },
+                                            connectionStringName,
+                                            true);
+        }
     }
 }
