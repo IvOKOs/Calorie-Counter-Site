@@ -1,11 +1,6 @@
 ﻿document.addEventListener("DOMContentLoaded", function () {
     var ctx = document.getElementById("weight-chart").getContext("2d");
-    var weightHistory = [
-        { RecordedDate: "2023-01-01", Weight: 25 },
-        { RecordedDate: "2023-02-01", Weight: 35 },
-        { RecordedDate: "2023-03-01", Weight: 45 },
-        { RecordedDate: "2023-04-01", Weight: 15 },
-    ];
+    
 
     var labels = weightHistory.map(function (record) {
         // return new Date(record.RecordedDate).toLocaleDateString();
