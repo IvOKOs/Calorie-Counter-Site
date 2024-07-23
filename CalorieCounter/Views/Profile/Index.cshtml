@@ -1,11 +1,61 @@
-﻿
-@{
-    ViewData["Title"] = "Profile"; 
-}
+﻿@using CalorieCounter.Models.ViewModels
+
+@model ProfileViewModel
 
 @{
+    ViewData["Title"] = "Profile";
     Layout = null;
+
+    List<string> activityOptions = new List<string>()
+    {
+        "Sedentary",
+        "Lightly active",
+        "Moderately active",
+        "Very active",
+        "Extremely active"
+    };
+
+    List<string> genderOptions = new List<string>()
+    {
+        "male",
+        "female"
+    };
+
+    string activity = "";
+    switch (Model.User.Activity)
+    {
+        case 1:
+            activity = "Sedentary";
+            break;
+        case 2:
+            activity = "Lightly active";
+            break;
+        case 3:
+            activity = "Moderately active";
+            break;
+        case 4:
+            activity = "Very active";
+            break;
+        case 5:
+            activity = "Extremely active";
+            break;
+    }
+
+    var optionsHtml = new System.Text.StringBuilder();
+    foreach (var option in activityOptions)
+    {
+        var selectedAttribute = activity == option ? "selected" : "";
+        optionsHtml.AppendFormat("<option value='{0}' {1}>{2}</option>", option, selectedAttribute, option);
+    }
+
+    var gendersHtml = new System.Text.StringBuilder();
+    foreach(var gender in genderOptions)
+    {
+        var selectedAttribute = Model.User.Gender == gender ? "selected" : "";
+        gendersHtml.AppendFormat("<option value='{0}' {1}>{2}</option>", gender, selectedAttribute, gender);
+    }
 }
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -108,45 +158,47 @@
           <div class="user-data-box">
             <div class="info-box">
               <label for="first-name">First Name</label>
-              <input type="text" id="first-name" />
+              <input type="text" id="first-name" value="@Model.User.FirstName" />
             </div>
             <div class="info-box">
               <label for="last-name">Last Name</label>
-              <input type="text" id="last-name" />
+              <input type="text" id="last-name" value="@Model.User.LastName" />
             </div>
             <div class="info-box">
               <label for="email">Email</label>
-              <input type="email" id="email" />
+              <input type="email" id="email" value="@Model.User.Email" />
             </div>
             <div class="info-box">
               <label for="age">Age</label>
-              <input type="number" id="age" />
+              <input type="number" id="age" value="@Model.User.Age" />
             </div>
           </div>
           <div class="user-data-box">
             <div class="info-box">
               <label for="weight">Weight (kg)</label>
-              <input type="text" id="weight" />
+              <input type="text" id="weight" value="@Model.User.Weight" />
             </div>
             <div class="info-box">
               <label for="height">Height (cm)</label>
-              <input type="text" id="height" />
+              <input type="text" id="height" value="@Model.User.Height" />
             </div>
             <div class="info-box">
               <label for="activity-select">Activity</label>
               <select
                 name=""
                 id="activity-select"
-                class="profile-select"
-              ></select>
+                class="profile-select">
+                    @Html.Raw(optionsHtml.ToString());
+              </select>
             </div>
             <div class="info-box">
               <label for="gender-select">Gender</label>
               <select
                 name=""
                 id="gender-select"
-                class="profile-select"
-              ></select>
+                class="profile-select">
+                @Html.Raw(gendersHtml.ToString());
+          </select>
             </div>
           </div>
         </div>
