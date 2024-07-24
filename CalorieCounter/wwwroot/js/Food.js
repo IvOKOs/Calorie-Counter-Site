@@ -37,10 +37,8 @@ $(document).ready(function () {
     $('#searchInput').on('input', function () {
         var searchTerm = $(this).val();
         if (searchTerm.length >= 2) {
-            // Perform autocomplete request
             sendAutocompleteRequest(searchTerm);
         } else {
-            // Clear autocomplete suggestions
             clearAutocompleteResults();
         }
     });
@@ -53,7 +51,7 @@ function calculateNutrition() {
     // Make an asynchronous request to the server to calculate nutrition values
     // Send the quantity value to the server and receive the calculated values in response
 
-    // using fetch: 
+     
     fetch('/Food/CalculateNutrition', {
         method: 'POST',
         headers: {
@@ -64,7 +62,6 @@ function calculateNutrition() {
         .then(response => response.json())
         .then(data => {
             // Update the nutrition elements with the received data
-            console.log(data);
             var nutritionInfo = document.getElementById('nutrition-info');
             nutritionInfo.querySelector('h5:nth-of-type(1)').textContent = 'Calories: ' + data.calories.toFixed(2) + ' kcal';
             nutritionInfo.querySelector('h5:nth-of-type(2)').textContent = 'Protein: ' + data.protein.toFixed(2) + ' gr';
@@ -84,11 +81,10 @@ function calculateNutrition() {
 
 function sendAutocompleteRequest(searchTerm) {
     $.ajax({
-        url: '/Food/AutoComplete', // Replace 'Controller' with your actual controller name
+        url: '/Food/AutoComplete',
         type: 'GET',
         data: { term: searchTerm },
         success: function (data) {
-            // Populate autocomplete suggestions in the view
             populateAutocompleteResults(data);
         },
         error: function (error) {

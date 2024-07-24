@@ -3,6 +3,7 @@ using DataLibrary.BusinessLogic;
 using DataAccessModels = DataLibrary.Models;
 using PresentationModels = CalorieCounter.Models;
 using Microsoft.AspNetCore.Mvc;
+using CalorieCounter.Models;
 
 namespace CalorieCounter.Controllers
 {
@@ -68,6 +69,11 @@ namespace CalorieCounter.Controllers
             };
 
             return View(profile);
+        }
+
+        public IActionResult Update(UserModel user)
+        {
+            return View();
         }
     }
 }
