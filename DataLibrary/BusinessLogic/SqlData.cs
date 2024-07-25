@@ -300,6 +300,7 @@ namespace DataLibrary.BusinessLogic
             _dataAccess.SaveData<dynamic>("dbo.spUsers_UpdateUser",
                                             new
                                             {
+                                                Id = user.Id,
                                                 FirstName = user.FirstName,
                                                 LastName = user.LastName,
                                                 Email = user.Email,

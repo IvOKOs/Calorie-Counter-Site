@@ -73,7 +73,49 @@ namespace CalorieCounter.Controllers
 
         public IActionResult Update(UserModel user)
         {
-            return View();
+            if(user == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            DataAccessModels.UserModel userModel = new()
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Gender = user.Gender,
+                Age = user.Age,
+                Height = user.Height,
+                Weight = user.Weight,
+                Activity = user.Activity,
+                Goal= user.Goal,
+            };
+
+            int id = 0;
+            var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "UserId");
+
+            if (userIdClaim != null)
+            {
+                id = int.Parse(userIdClaim.Value);
+                if (id == 0)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+
+            userModel.Id = id;
+            _db.UpdateUser(userModel);
+
+            DataAccessModels.WeightHistoryModel weightHistory = new()
+            {
+                UserId = id,
+                Weight = user.Weight,
+                RecordedDate = DateTime.Now
+            };
+
+            _db.InsertWeightHistory(weightHistory);
+
+            return RedirectToAction("Index", "Profile");
         }
     }
 }
